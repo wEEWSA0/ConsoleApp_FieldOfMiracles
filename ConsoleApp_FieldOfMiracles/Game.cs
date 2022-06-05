@@ -184,9 +184,9 @@ namespace ConsoleApp_FieldOfMiracles
             return word;
         }
 
-        static bool IsWonOnCurrentMotion(string inputStr, ref Word word)
+        static int IsWonOnCurrentMotion(string inputStr, ref Word word)
         {
-            bool isWon = false;
+            int isWon = 0;
             if (inputStr.Length != 1)
             {
                 inputStr = SystemInput.GetNormalTextSugestion(inputStr);
@@ -194,11 +194,12 @@ namespace ConsoleApp_FieldOfMiracles
                 if (word.fullWord == inputStr)
                 {
                     Console.WriteLine("Вы правильно отгадали! Правильным ответом было слово " + word.fullWord);
-                    isWon = true;
+                    isWon = 1;
                 }
                 else
                 {
                     Console.WriteLine("Вы не отгадали! К сожалению, игра окончена. Правильным ответом было слово " + word.fullWord);
+                    isWon = -1;
                 }
             }
             else
@@ -218,11 +219,12 @@ namespace ConsoleApp_FieldOfMiracles
                         if (word.letters.Length == 0)
                         {
                             Console.WriteLine("Вы отгадали слово целиком! Правильным ответом было слово " + word.fullWord);
-                            isWon = true;
+                            isWon = 1;
                         }
                         else
                         {
                             Console.WriteLine("Слово: " + word.word);
+                            isWon = 0;
                         }
                     }
                 }
@@ -255,11 +257,11 @@ namespace ConsoleApp_FieldOfMiracles
                 Console.WriteLine("\n" + new String(' ', 15) + "Вы получаете " + drum.GetStep(drum.position) + " баллов");
                 #endregion
                 string inputStr = SystemInput.InputString(new String(' ', 12) + "Введите букву или слово целиком");
-                bool isWon = IsWonOnCurrentMotion(inputStr, ref word);
+                int isWon = IsWonOnCurrentMotion(inputStr, ref word);
 
                 Console.ReadKey();
 
-                if (!isWon)
+                if (isWon == 0)
                 {
                     ShowGameBar(word, question);
                     Console.WriteLine("\n" + new String(' ', 21) + "Ход Якубовича\n");
@@ -341,8 +343,16 @@ namespace ConsoleApp_FieldOfMiracles
                 }
                 else
                 {
-                    Console.WriteLine("Якубович повержен!");
-                    Console.Write("\nВы заканчиваете игру со счетом " + points + "\n");
+                    if (isWon == 1)
+                    {
+                        Console.WriteLine("\nЯкубович повержен!");
+                        Console.Write("\nВы заканчиваете игру со счетом " + points + "\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nЯкубович побеждает, вы проигрываете!");
+                        Console.Write("\nВаш счет аннулируется (" + points + " -> 0)\n");
+                    }
                     break;
                 }
             }
