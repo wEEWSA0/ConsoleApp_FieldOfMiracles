@@ -9,7 +9,7 @@ namespace ConsoleApp_FieldOfMiracles
 {
     public class QuestionsManager
     {
-        const string infoFile = "GameData.txt";
+        public const string infoFile = "GameData.txt";
         struct Question
         {
             public string info;

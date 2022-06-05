@@ -310,7 +310,7 @@ namespace ConsoleApp_FieldOfMiracles
                             Console.WriteLine("Якубович решает сказать букву");
                             await Task.Delay(random.Next(500, 1000));
                             char randFalseLetter = (char)random.Next('а', 'я');
-                            Console.WriteLine(randFalseLetter);
+
                             while (true)
                             {
                                 bool isFalseLetterNum = true;

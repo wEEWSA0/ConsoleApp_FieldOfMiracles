@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -112,8 +113,15 @@ namespace ConsoleApp_FieldOfMiracles
                 case 0:
                     {
                         Console.WriteLine("Load Game Script");
-                        var gameScript = new Game();
-                        gameScript.MainGame(args).Wait();
+                        if (File.Exists(QuestionsManager.infoFile))
+                        {
+                            var gameScript = new Game();
+                            gameScript.MainGame(args).Wait();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\nНе найдены вопросы. Пожалуйста добавьте вопросы в меню Вопросы или положите файл {QuestionsManager.infoFile} в папку(ConsoleApp_FieldOfMiracles/ConsoleApp_FieldOfMiracles/bin/Debug)");
+                        }
                         break;
                     }
                 case 1:
