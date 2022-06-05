@@ -120,7 +120,9 @@ namespace ConsoleApp_FieldOfMiracles
                         }
                         else
                         {
-                            Console.WriteLine($"\nНе найдены вопросы. Пожалуйста добавьте вопросы в меню Вопросы или положите файл {QuestionsManager.infoFile} в папку(ConsoleApp_FieldOfMiracles/ConsoleApp_FieldOfMiracles/bin/Debug)");
+                            Console.WriteLine($"\nНе найдены вопросы. \nПожалуйста добавьте вопросы в меню Вопросы или положите файл {QuestionsManager.infoFile} в папку(ConsoleApp_FieldOfMiracles/ConsoleApp_FieldOfMiracles/bin/Debug)");
+                            Console.WriteLine("\nПриложение закроется после нажатия Enter");
+                            Console.ReadLine();
                         }
                         break;
                     }
